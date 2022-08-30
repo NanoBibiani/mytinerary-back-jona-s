@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const eventCities = require('./cities')
 
 /* GET home page. */
 // req = request, peticion del cliente
@@ -7,5 +8,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.json()
 });
+
+router.use('/cities',eventCities)
 
 module.exports = router;

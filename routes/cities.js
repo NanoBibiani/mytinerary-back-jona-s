@@ -1,13 +1,16 @@
 var express = require('express')
 var router = express.Router()
-const {create,read,update,deleteCity} = require("../controllers/CityController")
+const {create,read,update,deleteCity,all,filterCity} = require("../controllers/CityController")
 
 
 
 router.post('/', create)
-router.get('/id',read)
-router.get('/id/update',update)
-router.post('/id/delete',deleteCity)
+router.get('/:id',read)
+router.put('/:id',update)
+router.delete('/:id',deleteCity)
+router.get('/',all)
+router.get('/', filterCity)
+
 
 
 module.exports = router

@@ -21,11 +21,13 @@ const CityController = {
 
     read: async(req,res)=>{
         const {id} = req.params
+        const {city,country,photo,population,fundation} = req.body
         try{
-            await new City.findOne({_id:id})
-            if(City){
+            let oneCity = await  City.findOne({_id:id}, req.body)
+            if(oneCity){
                 res.status(200).json({
                     messaje: " city finded",
+                    response: oneCity,
                     success:true
                 })
 
@@ -49,11 +51,13 @@ const CityController = {
 
     update: async(req,res)=>{
         const {id} = req.params
+        const {city,country,photo,population,fundation} = req.body
         try{
-            await new City.findOneAndUpdate({_id:id}).save()
-            if(City){
+            let cityUpdate = await  City.findOneAndUpdate({_id:id}, req.body)
+            if(cityUpdate){
                 res.status(200).json({
-                    messaje: " city updated",
+                    messaje: " city finded",
+                    response: cityUpdate,
                     success:true
                 })
 
@@ -79,26 +83,67 @@ const CityController = {
         
         try{
             
-            await new City . findOneAndDelete({_id : id})
-            if(City){
+           let deleteCity = await City.findOneAndDelete({_id : id})
+            
 
                 res.status(200).json({
                     messaje:"city deleted",
+                    response: deleteCity,
                     success:true
                 })
-            }else{
-                res.status(404).json({
-                    messaje:"city not finded",
-                    success:false
-                })
-            }
+            
+            
         }catch(error){
             res.status(400).json({
                 messaje:error,
                 success: false
             })
         }
-    }
+    },
+
+    all: async (req,res) =>{
+        let cityAll;
+
+        try{
+
+            cityAll = await City.find()
+
+            res.status(200)
+            res.json(cityAll)
+
+        }catch(error){
+            console.log(error)
+            res.status(500)
+        }
+    },
+
+    filterCity : async (req,res)=>{
+
+        let query = {}
+
+        if(req.query.country){
+            query.country = req.query.country
+        }
+
+        if(req.query.city){
+            query.city = req.query.city
+        }
+
+        if(req.query.fundation){
+            query.fundation = req.query.fundation
+        }
+
+        let cities;
+
+        try{
+            cities = City.find(query)
+            res.status(200)
+            res.json(cities)
+        }catch(err){
+            console.log(err)
+            res.status(500)
+        }
+    },
    
 
 }

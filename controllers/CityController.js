@@ -101,7 +101,7 @@ const CityController = {
         }
     },
 
-  all : async (req,res)=>{
+
 
         let query = {}
 
@@ -128,7 +128,7 @@ const CityController = {
             res.status(500)
         }
     },
-   
+
 
 }
 

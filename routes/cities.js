@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-const {create,read,update,deleteCity,all,filterCity} = require("../controllers/CityController")
+const {create,read,update,deleteCity,all} = require("../controllers/CityController")
 
 
 
@@ -9,7 +9,7 @@ router.get('/:id',read)
 router.put('/:id',update)
 router.delete('/:id',deleteCity)
 router.get('/',all)
-router.get('/', filterCity)
+
 
 
 

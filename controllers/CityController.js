@@ -101,23 +101,7 @@ const CityController = {
         }
     },
 
-    all: async (req,res) =>{
-        let cityAll;
-
-        try{
-
-            cityAll = await City.find()
-
-            res.status(200)
-            res.json(cityAll)
-
-        }catch(error){
-            console.log(error)
-            res.status(500)
-        }
-    },
-
-    filterCity : async (req,res)=>{
+    all : async (req,res)=>{
 
         let query = {}
 
@@ -136,7 +120,7 @@ const CityController = {
         let cities;
 
         try{
-            cities = City.find(query)
+            cities = await City.find(query)
             res.status(200)
             res.json(cities)
         }catch(err){
@@ -144,7 +128,7 @@ const CityController = {
             res.status(500)
         }
     },
-   
+
 
 }
 

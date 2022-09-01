@@ -101,7 +101,7 @@ const CityController = {
         }
     },
 
-    all : async (req,res)=>{
+
 
         let query = {}
 
@@ -110,7 +110,7 @@ const CityController = {
         }
 
         if(req.query.city){
-            query.city = req.query.city
+            query.city =  { $regex: '^' + req.query.city, $options: 'i' };
         }
 
         if(req.query.fundation){

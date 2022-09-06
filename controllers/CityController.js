@@ -101,8 +101,8 @@ const CityController = {
         }
     },
 
-  all : async (req,res)=>{
 
+   all: async (req,res) =>{
         let query = {}
 
         if(req.query.country){
@@ -128,7 +128,7 @@ const CityController = {
             res.status(500)
         }
     },
-   
+
 
 }
 

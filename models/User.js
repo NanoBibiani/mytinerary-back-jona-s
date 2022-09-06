@@ -9,7 +9,11 @@ const schema = new mongoose.Schema({
 })
 
 const User = mongoose.model(
+ controllers
     'users',
+
+    'users',
+sprint-2
     schema
 )
 module.exports = User

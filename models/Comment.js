@@ -6,7 +6,11 @@ const schema = new mongoose.Schema({
 })
 
 const Comment = mongoose.model(
-    'cities',
+ controllers
+    'comments',
+
+    'comments',
+ sprint-2
     schema
 )
 

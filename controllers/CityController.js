@@ -7,13 +7,14 @@ const CityController = {
             await new City(req.body).save()
             res.status(201).json({
                 messaje : "city created",
-                success : true
+                success : true,
+                id:req.body.id
             })
         }catch(error){
             console.log(error)
-            res.status(401).json({
+            res.status(400).json({
                 messaje : error,
-                success : false
+                success : false,
             })
         }
     },

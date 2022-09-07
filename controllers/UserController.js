@@ -1,41 +1,38 @@
-const Itineraries = require('../models/Itinerary')
+const user = require('../models/User')
 
 
-const ItinerariesController = {
+const UserController = {
     create: async(req,res)=>{
        
         try{
-            await new Itineraries(req.body).save()
+            await new user(req.body).save()
             res.status(201).json({
-                messaje : "Itineraries created",
-                success : true,
-                id:req.body.id
+                messaje : "user created",
+                success : true
             })
         }catch(error){
             console.log(error)
-            res.status(400).json({
+            res.status(401).json({
                 messaje : error,
-                success : false,
+                success : false
             })
         }
     },
-
 
     read: async(req,res)=>{
         const {id} = req.params
-        const {city,country,photo,population,fundation} = req.body
         try{
-            let oneItineraries = await  Itineraries.findOne({_id:id}, req.body)
-            if(oneItineraries){
+            let oneUser = await  user.findOne({_id:id}, req.body)
+            if(oneUser){
                 res.status(200).json({
-                    messaje: " Itineraries finded",
-                    response: oneItineraries,
+                    messaje: " comment finded",
+                    response: oneUser,
                     success:true
                 })
 
             }else{
                 res.status(404).json({
-                    messaje : "Itineraries not finded",
+                    messaje : "user not finded",
                     success:false
                 })
             }
@@ -49,23 +46,21 @@ const ItinerariesController = {
         }
 
     },
-
 
     update: async(req,res)=>{
         const {id} = req.params
-        const {city,country,photo,population,fundation} = req.body
         try{
-            let ItinerariesUpdate = await  Itineraries.findOneAndUpdate({_id:id}, req.body)
-            if(ItinerariesUpdate){
+            let userUpdate = await  user.findOneAndUpdate({_id:id}, req.body)
+            if(userUpdate){
                 res.status(200).json({
-                    messaje: " Itineraries finded",
-                    response: ItinerariesUpdate,
+                    messaje: " user finded",
+                    response: userUpdate,
                     success:true
                 })
 
             }else{
                 res.status(404).json({
-                    messaje : "Itineraries not finded",
+                    messaje : "user not finded",
                     success:false
                 })
             }
@@ -80,19 +75,25 @@ const ItinerariesController = {
 
     },
 
-    deleteItinery : async(req,res)=>{
+    deleteUser : async(req,res)=>{
         const {id} = req.params
         
         try{
             
-           let deleteItineraries = await Itineraries.findOneAndDelete({_id : id})
+           let deleteuser = await user.findOneAndDelete({_id : id})
+           if(deleteuser){
+            res.status(200).json({
+                messaje:"user deleted",
+                response: deleteuser,
+                success:true
+            })
+           }else{
+            res.status(404).json({
+                messaje : "activity not finded",
+                success:false
+            })
+           }
             
-
-                res.status(200).json({
-                    messaje:"Itineraries deleted",
-                    response: deleteItineraries,
-                    success:true
-                })
             
             
         }catch(error){
@@ -103,8 +104,7 @@ const ItinerariesController = {
         }
     },
 
-
-   all: async (req,res) =>{
+    all: async (req,res) =>{
         let query = {}
 
         if(req.query.country){
@@ -119,12 +119,12 @@ const ItinerariesController = {
             query.fundation = req.query.fundation
         }
 
-        let ItinerariesAll;
+        let usered;
 
         try{
-            ItinerariesAll = await Itineraries.find(query)
+            usered = await user.find(query)
             res.status(200)
-            res.json(ItinerariesAll)
+            res.json(usered)
         }catch(err){
             console.log(err)
             res.status(500)
@@ -133,6 +133,4 @@ const ItinerariesController = {
 
 
 }
-
-
-module.exports = ItinerariesController
+module.exports= UserController

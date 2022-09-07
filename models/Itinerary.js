@@ -10,11 +10,8 @@ const schema = new mongoose.Schema({
 })
 
 const Itinerary = mongoose.model(
-controllers
-    'itineraries',
 
     'itineraries',
- sprint-2
     schema
 )
 

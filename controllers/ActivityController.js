@@ -106,25 +106,27 @@ const ActivityController = {
         }
     },
 
-    all : async (req,res)=>{
-
+    all: async (req,res) =>{
         let query = {}
 
-        if(req.query.itinerary){
-            query.itinerary = req.query.itinerary
+        if(req.query.country){
+            query.country = req.query.country
         }
 
-        if(req.query.name){
-            query.name =  { $regex: '^' + req.query.name.trim(), $options: 'i' };
+        if(req.query.city){
+            query.city =  { $regex: '^' + req.query.city, $options: 'i' };
         }
 
+        if(req.query.fundation){
+            query.fundation = req.query.fundation
+        }
 
-        let activiesAll;
+        let activityAll;
 
         try{
-            activiesAll = await activity.find(query)
+            activityAll = await activity.find(query)
             res.status(200)
-            res.json(activiesAll)
+            res.json(activityAll)
         }catch(err){
             console.log(err)
             res.status(500)
@@ -132,4 +134,4 @@ const ActivityController = {
     },
 
 }
-export default ActivityController
+module.exports = ActivityController

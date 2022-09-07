@@ -50,7 +50,7 @@ const CommentController = {
     update: async(req,res)=>{
         const {id} = req.params
         try{
-            let CommentUpdate = await  activity.findOneAndUpdate({_id:id}, req.body)
+            let CommentUpdate = await  comment.findOneAndUpdate({_id:id}, req.body)
             if(CommentUpdate){
                 res.status(200).json({
                     messaje: " comment finded",
@@ -80,7 +80,7 @@ const CommentController = {
         
         try{
             
-           let deleteComment = await activity.findOneAndDelete({_id : id})
+           let deleteComment = await comment.findOneAndDelete({_id : id})
            if(deleteComment){
             res.status(200).json({
                 messaje:"activity deleted",
@@ -104,30 +104,33 @@ const CommentController = {
         }
     },
 
-    all : async (req,res)=>{
-
+    all: async (req,res) =>{
         let query = {}
 
-        if(req.query.comment){
-            query.comment = req.query.comment
+        if(req.query.country){
+            query.country = req.query.country
         }
 
-        if(req.query.user){
-            query.user =  { $regex: '^' + req.query.user.trim(), $options: 'i' };
+        if(req.query.city){
+            query.city =  { $regex: '^' + req.query.city, $options: 'i' };
         }
 
+        if(req.query.fundation){
+            query.fundation = req.query.fundation
+        }
 
-        let commentAll;
+        let commented;
 
         try{
-            commentAll = await activity.find(query)
+            commented = await comment.find(query)
             res.status(200)
-            res.json(commentAll)
+            res.json(commented)
         }catch(err){
             console.log(err)
             res.status(500)
         }
     },
 
+
 }
-export default CommentController
+module.exports= CommentController

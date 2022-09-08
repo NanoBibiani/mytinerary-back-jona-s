@@ -1,6 +1,7 @@
 const comment = require('../models/Comment')
 
 
+
 const CommentController = {
     create: async(req,res)=>{
        
@@ -104,25 +105,24 @@ const CommentController = {
         }
     },
 
-    all: async (req,res) =>{
+   
+    allRelation: async (req,res) =>{
         let query = {}
 
-        if(req.query.country){
-            query.country = req.query.country
+        if(req.query.name){
+            query.country = req.query.name
         }
 
-        if(req.query.city){
-            query.city =  { $regex: '^' + req.query.city, $options: 'i' };
+        if(req.query.itineraries){
+            query.itineraries = req.query.itineraries;
         }
 
-        if(req.query.fundation){
-            query.fundation = req.query.fundation
-        }
 
         let commented;
 
         try{
             commented = await comment.find(query)
+            .populate('itinerary',{name:1,city:1})
             res.status(200)
             res.json(commented)
         }catch(err){

@@ -111,7 +111,7 @@ const CityController = {
         }
 
         if(req.query.city){
-            query.city =  { $regex: '^' + req.query.city, $options: 'i' };
+            query.city =  { $regex: '^' + req.query.city.trim(), $options: 'i' };
         }
 
         if(req.query.fundation){

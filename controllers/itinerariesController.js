@@ -103,16 +103,15 @@ const ItinerariesController = {
         }
     },
 
-
-   all: async (req,res) =>{
+    allRelation: async (req,res) =>{
         let query = {}
 
-        if(req.query.country){
-            query.country = req.query.country
+        if(req.query.user){
+            query.user = req.query.user
         }
 
         if(req.query.city){
-            query.city =  { $regex: '^' + req.query.city, $options: 'i' };
+            query.city =   req.query.city;
         }
 
         if(req.query.fundation){
@@ -123,6 +122,8 @@ const ItinerariesController = {
 
         try{
             ItinerariesAll = await Itineraries.find(query)
+                                .populate('city',{city:1})
+                                .populate('user',{name:1,photo:1})
             res.status(200)
             res.json(ItinerariesAll)
         }catch(err){

@@ -106,25 +106,21 @@ const ActivityController = {
         }
     },
 
-    all: async (req,res) =>{
+  
+    allRelation: async (req,res) =>{
         let query = {}
 
-        if(req.query.country){
-            query.country = req.query.country
+
+        if(req.query.itineraries){
+            query.itineraries =   req.query.itineraries
         }
 
-        if(req.query.city){
-            query.city =  { $regex: '^' + req.query.city, $options: 'i' };
-        }
-
-        if(req.query.fundation){
-            query.fundation = req.query.fundation
-        }
 
         let activityAll;
 
         try{
             activityAll = await activity.find(query)
+            .populate('itinerary',{name:1 , city:1})
             res.status(200)
             res.json(activityAll)
         }catch(err){
@@ -132,6 +128,7 @@ const ActivityController = {
             res.status(500)
         }
     },
+
 
 }
 module.exports = ActivityController

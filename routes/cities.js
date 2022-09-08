@@ -6,7 +6,7 @@ const {create,read,update,deleteCity,all} = require("../controllers/CityControll
 
 router.post('/', create)
 router.get('/:id',read)
-router.get('/id/update',update)
+router.patch('/id/update',update)
 router.post('/id/delete',deleteCity)
 router.get('/',all)
 

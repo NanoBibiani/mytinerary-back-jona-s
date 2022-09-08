@@ -4,7 +4,7 @@ const schema = new mongoose.Schema({
     country:{type:String,required:true},
     photo:{type:String,required:true},
     population:{type:Number},
-    fundation:{type:Number,required:true}
+    fundation:{type:Number,required:true},
 
 })
 

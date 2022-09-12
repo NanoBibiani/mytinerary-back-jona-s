@@ -16,5 +16,5 @@ router.use('/cities',eventCities)
 router.use('/comment',eventComments)
 router.use('/activities',eventActivities)
 router.use('/itineraries',eventItineraries)
-router.use('/user',eventUser)
+router.use('/auth',eventUser)
 module.exports = router;
